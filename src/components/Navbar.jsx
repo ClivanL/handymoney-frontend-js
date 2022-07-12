@@ -8,6 +8,7 @@ const navigate=useNavigate();
         <div className="container">
             <button onClick={()=>navigate("/")}>Home</button>
             <button onClick={()=>navigate("/createparty")}>Create Party</button>
+            <button onClick={()=>navigate("/addtoparty")}>Party members</button>
             <button onClick={()=>navigate("/tally")}>Tally</button>
             <button onClick={()=>navigate("/history")}>History</button>
         </div>

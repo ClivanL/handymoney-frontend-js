@@ -1,11 +1,13 @@
 import {useState, useContext, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Party} from '../App'
+import ChangePartyNameForm from '../components/ChangePartyNameForm'
 
 const AddParty=()=>{
     const [person, setPerson]=useState("")
     const [mod,setMod]=useState("")
     const [list, setList]=useState([])
+    const [toggle,setToggle]=useState(false)
     const navigate=useNavigate();
     const context=useContext(Party);
     // console.log(context.partyName);
@@ -32,6 +34,10 @@ const AddParty=()=>{
             setMod(data);
         });
     }
+    const handleUpdate=()=>{
+      setToggle(true);
+    }
+    // console.log(toggle);
 
     const handleDelete=(todelete)=>{
         // console.log(todelete.id);
@@ -47,10 +53,11 @@ const AddParty=()=>{
                 
             // });
     }
+    console.log(context.partyName.partyName);
 
     return (
     <>
-    <h1>Enter members for {context.partyName.partyName}</h1>
+    <h1>Enter members for: {toggle===false?<div>{context.partyName.partyName}<button onClick={handleUpdate}>Change Party name</button></div>:<ChangePartyNameForm setMod={setMod} setToggle={setToggle}/>}</h1>
     <form onSubmit={handleSubmit}>
         <input name="name" id="name" placeholder="input name" value={person} onChange={(event)=>setPerson(event.target.value)}/>
         <button>Add to party</button>

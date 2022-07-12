@@ -76,7 +76,7 @@ const Receipt = ({
           onChange={(event) =>
             setItem({
               itemName: item.itemName,
-              price: parseFloat(event.target.value),
+              price: event.target.value,
               receipt: item.receipt,
             })
           }
