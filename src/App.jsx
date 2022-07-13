@@ -3,13 +3,15 @@ import logo from './logo.svg'
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Tally from './pages/Tally'
-import Navbar from './components/Navbar'
+import HomeBar from './components/HomeBar'
 import AddParty from './pages/AddParty'
 import AddPartyName from './pages/AddPartyName'
 import Receipts from './pages/Receipts'
 import ExcludeFromSplit from './pages/ExcludeFromSplit'
 import Testing from './pages/Testing'
 import Breakdown from './pages/Breakdown'
+import Home from './pages/Home'
+
 
 
 export const Party=createContext();
@@ -17,21 +19,22 @@ export const Party=createContext();
 function App() {
 const [partyName, setPartyName]=useState({partyName:"", partyId:""});
 const [exclusion, setExclusion]=useState()
+const [payed, setPayed]=useState({})
 
   return (
     <div className="App">
-      <h1>HanDyMoney</h1>
-    <Party.Provider value={{partyName, setPartyName, exclusion, setExclusion}} >
+    <Party.Provider value={{partyName, setPartyName, exclusion, setExclusion, payed, setPayed}} >
     <BrowserRouter>
-    <Navbar/>
+    <HomeBar/>
     <Routes>
+      <Route path="/" element={<Home/>}/>
       <Route path="/tally" element={<Tally/>} />
       <Route path="/createparty" element={<AddPartyName/> }/>
       <Route path="/addtoparty" element={<AddParty/>} />
       <Route path="/receipts" element={<Receipts/>}/>
       <Route path="/toexcludefromsplit" element={<ExcludeFromSplit/>}/>
       <Route path="/breakdown" element={<Breakdown/>}/>
-      {/* <Route path="/" element={<Testing/>}/> */}
+      <Route path="/testing" element={<Testing/>}/>
     </Routes>
     </BrowserRouter>
     </Party.Provider>

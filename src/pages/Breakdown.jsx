@@ -4,6 +4,9 @@ import useDetails from "../hooks/useDetails";
 import useItemDetails from "../hooks/useItemDetails";
 import CalculateBreakdown from "../functions/CalculateBreakdown";
 import useReceipt from "../hooks/useReceipt";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Table from "react-bootstrap/Table";
 
 const Breakdown = () => {
   const context = useContext(Party);
@@ -12,10 +15,11 @@ const Breakdown = () => {
   console.log("item details", itemDetails);
   console.log("breakdown", context.exclusion);
   console.log("list receipts", listReceipt);
-  const { groupByCategory, distributionToPerson } = CalculateBreakdown(
+  const { groupByCategory, distributionToPerson, personCost } = CalculateBreakdown(
     context.exclusion,
     itemDetails,
-    listPerson
+    listPerson,
+    listReceipt
   );
 
   console.log(groupByCategory);
@@ -49,11 +53,35 @@ const Breakdown = () => {
       })} */}
 
       <h2>Breakdown of payment:</h2>
-      {distributionToPerson.map((item) => (
+      <Col md={{ span: 4, offset: 4 }}>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>To Pay, $</th>
+                <th>Amount Paid, $</th>
+                <th>Amount to receive, $</th>
+              </tr>
+            </thead>
+            <tbody>
+              {distributionToPerson.map((item) => {
+                return (
+                  <tr>
+                    <td>{item.personName}</td>
+                    <td>{item.pay}</td>
+                    <td>{personCost[item.personName]===undefined?0:personCost[item.personName]}</td>
+                    <td>{personCost[item.personName]===undefined?0-item.pay:personCost[item.personName]-item.pay}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </Col>
+      {/* {distributionToPerson.map((item) => (
         <p>
           {item.personName}:${item.pay}
         </p>
-      ))}
+      ))} */}
     </>
   );
 };

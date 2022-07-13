@@ -1,4 +1,4 @@
-const CalculateBreakdown= (exclusion, itemDetails, listPerson)=>{
+const CalculateBreakdown= (exclusion, itemDetails, listPerson, listReceipt)=>{
 
 // console.log("exclusion",await exclusion);
 // console.log("itemdetails",await itemDetails);
@@ -49,7 +49,21 @@ const groupByCategory = processed?.reduce((group, product) => {
   console.log(groupByCategory);
   console.log(distributionToPerson);
 
-return {groupByCategory:groupByCategory, distributionToPerson:distributionToPerson}
+let personCost={}
+for(let i=0; i<listReceipt?.length;i++){
+  personCost[listReceipt?.[i]?.payer]=0;
+}
+
+for(let i=0;i<foodToTabulate?.length;i++){
+  for(let j=0;j<listReceipt?.length;j++){
+    if(foodToTabulate?.[i]?.receipt===`https://handymoney.herokuapp.com/receipt/${listReceipt[j].id}/`){
+      personCost[listReceipt?.[j]?.payer]+=foodToTabulate?.[i]?.price;
+    }
+  }
+}
+console.log(personCost);
+
+return {groupByCategory:groupByCategory, distributionToPerson:distributionToPerson, personCost:personCost}
 
 }
 

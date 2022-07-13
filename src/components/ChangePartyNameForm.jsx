@@ -1,5 +1,7 @@
 import { useState, useContext} from "react";
 import {Party} from '../App'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const ChangePartyNameForm = ({ setMod,setToggle }) => {
     const context=useContext(Party);
@@ -18,6 +20,7 @@ const ChangePartyNameForm = ({ setMod,setToggle }) => {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         context.setPartyName(data);
       });
     setToggle(false);
@@ -27,7 +30,18 @@ const ChangePartyNameForm = ({ setMod,setToggle }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Control type="text"  id="partyName"
+          name="partyName"
+          value={name}
+          onChange={(event) => setName(event.target.value)}placeholder="Enter new party name" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Change
+      </Button>
+    </Form>
+      {/* <form onSubmit={handleSubmit}>
         <input
           placeholder="Enter new party name"
           id="partyName"
@@ -36,7 +50,7 @@ const ChangePartyNameForm = ({ setMod,setToggle }) => {
           onChange={(event) => setName(event.target.value)}
         />
         <button>Change Name</button>
-      </form>
+      </form> */}
     </>
   );
 };
