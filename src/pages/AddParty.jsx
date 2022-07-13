@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { Party } from "../App";
 import ChangePartyNameForm from "../components/ChangePartyNameForm";
@@ -11,7 +11,7 @@ import Table from "react-bootstrap/Table";
 
 const AddParty = () => {
   const [person, setPerson] = useState("");
-  const [mod, setMod] = useState("");
+  const [mod, setMod] = useState(0);
   const [list, setList] = useState([]);
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const AddParty = () => {
       .then((data) => {
         console.log(data);
         setPerson("");
-        setMod(data);
+        setMod(mod+1);
       });
   };
   const handleUpdate = () => {
@@ -62,7 +62,7 @@ const AddParty = () => {
       method: "delete",
       // headers: { "Content-Type": "application/json" },
       // body: JSON.stringify(todelete),
-    }).then(setMod(todelete.id));
+    }).then(setMod(mod+1));
     // .then((response) => response.json())
     // .then((data) => {
     //     console.log(data);
@@ -73,30 +73,6 @@ const AddParty = () => {
 
   return (
     <div>
-      <div className="centercard">
-      <Card border="light" style={{ margin:"auto", width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>Party Name:</Card.Title>
-          <Card.Text>
-            {toggle === false ? (
-              <>
-                <div>{context.partyName.partyName}</div>
-                <Button variant="secondary" size="sm" onClick={handleUpdate}>
-                  Change Party name
-                </Button>
-              </>
-            ) : (
-              <ChangePartyNameForm setMod={setMod} setToggle={setToggle} />
-            )}
-          </Card.Text>
-          {/* <Button variant="primary" onClick={() => navigate("/tally")}>
-            Confirm Party
-          </Button> */}
-        </Card.Body>
-      </Card>
-      </div>
-     
-
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Row>
@@ -119,17 +95,27 @@ const AddParty = () => {
       </Form>
       <br></br>
       <br></br>
-      {/* <form onSubmit={handleSubmit}>
-        <input
-          name="name"
-          id="name"
-          placeholder="input name"
-          value={person}
-          onChange={(event) => setPerson(event.target.value)}
-        />
-        <button>Add to party</button>
-      </form> */}
-      <Col md={{ span: 6, offset: 3 }}>
+
+      <div className="centercard">
+      <Card bg="light" variant="light" margin="light" style={{ margin:"auto", width: "40rem" }}>
+        <Card.Body>
+          <Card.Title>Party Name:</Card.Title>
+          <Card.Text>
+            {toggle === false ? (
+              <>
+                <div>{context.partyName.partyName}</div>
+                <Button variant="secondary" size="sm" onClick={handleUpdate}>
+                  Change Party name
+                </Button>
+              </>
+            ) : (
+              <ChangePartyNameForm mod={mod} setMod={setMod} setToggle={setToggle} />
+            )}
+          </Card.Text>
+          {/* <Button variant="primary" onClick={() => navigate("/tally")}>
+            Confirm Party
+          </Button> */}
+            <Col md={{ span: 8, offset: 2 }}>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -160,7 +146,21 @@ const AddParty = () => {
           </tbody>
         </Table>
       </Col>
-
+        </Card.Body>
+      </Card>
+      </div>
+      {/* <form onSubmit={handleSubmit}>
+        <input
+          name="name"
+          id="name"
+          placeholder="input name"
+          value={person}
+          onChange={(event) => setPerson(event.target.value)}
+        />
+        <button>Add to party</button>
+      </form> */}
+    
+<br></br>
       <Button variant="primary" onClick={() => navigate("/tally")}>
         Confirm Party
       </Button>

@@ -7,6 +7,7 @@ import Accordion from 'react-bootstrap/Accordion';
 const Receipts=()=>{
 const {partyName, listPerson, listReceipt}=useDetails();
 const navigate=useNavigate();
+
 // console.log(partyName);
 // console.log(listPerson);
 // console.log(listReceipt);

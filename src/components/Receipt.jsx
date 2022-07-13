@@ -6,13 +6,16 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
+import DollarRep from "./DollarRep";
+import EditForm from "./EditForm";
 
 // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
   const context = useContext(Party);
   const [list, setList] = useState([]);
-  const [mod, setMod] = useState({});
+  const [mod, setMod] = useState(0);
+  const [toggle, setToggle] = useState(false);
   const [item, setItem] = useState({
     itemName: "",
     price: 0,
@@ -31,7 +34,7 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
             );
           })
         );
-      })
+      });
     //   .then(
     //     context.setPayed({
     //       ...context.payed,
@@ -43,10 +46,8 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
     // );
   }, [mod]);
 
-console.log(context.payed);
+  // console.log(context.payed);
   // console.log(list);
-
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,10 +60,14 @@ console.log(context.payed);
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setMod(data);
-      })
-    
+        setMod(mod + 1);
+      });
   };
+
+  const handleEdit = () => {
+    setToggle(true);
+  };
+
   return (
     <>
       <p>Receipt {index}:</p>
@@ -140,7 +145,7 @@ console.log(context.payed);
         <button>Press to add items to receipt</button>
       </form> */}
       <br></br>
-      <Col md={{ span: 2, offset: 5 }}>
+      <Col md={{ span: 4, offset: 4 }}>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -151,12 +156,24 @@ console.log(context.payed);
           </thead>
           <tbody>
             {list.map((item) => {
-              return (
+              return toggle === true ? (
+                <EditForm
+                  mod={mod}
+                  item={item.itemName}
+                  price={item.price}
+                  setMod={setMod}
+                  setToggle={setToggle}
+                  receiptid={receiptid}
+                  id={item.id}
+                />
+              ) : (
                 <tr>
                   <td>{item.itemName}</td>
-                  <td>{item.price}</td>
                   <td>
-                    <Button size="sm" variant="warning">
+                    <DollarRep value={item.price} />
+                  </td>
+                  <td>
+                    <Button onClick={handleEdit} size="sm" variant="warning">
                       Edit
                     </Button>
                   </td>

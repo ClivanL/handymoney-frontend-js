@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { Formik, Field, Form} from "formik";
 import {useNavigate} from 'react-router-dom'
 import {Party} from '../App'
+import DollarRep from "../components/DollarRep";
 
 
 const ExcludeFromSplit = () => {
@@ -54,7 +55,7 @@ const ExcludeFromSplit = () => {
 
                 {listItem?.[index]?.map((it)=>{
                                  return <>
-                                  <div>{it.itemName}| ${it.price}</div>
+                                  <div>{it.itemName}| <DollarRep value={it.price}/></div>
                                   <div id="checkbox-group">Shared by:</div>
                                   <div role="group" aria-labelledby="checkbox-group">
                                   {listPerson.map((item) => 

@@ -15,6 +15,7 @@ const Tally = () => {
   const [mod, setMod] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     fetch(`https://handymoney.herokuapp.com/party/${context.partyName.id}`, {
       method: "GET",
@@ -68,8 +69,9 @@ const Tally = () => {
         setMod(data);
       });
   };
+  
 
-  return (
+  return(
     <>
       <h1>Start Tallying</h1>
       <div>

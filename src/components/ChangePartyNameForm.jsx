@@ -25,7 +25,7 @@ const ChangePartyNameForm = ({ setMod,setToggle }) => {
       });
     setToggle(false);
     setName("");
-    setMod(context.partyName.partyName);
+    setMod(mod+1);
   };
 
   return (
