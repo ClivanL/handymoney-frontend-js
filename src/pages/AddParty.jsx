@@ -16,6 +16,10 @@ const AddParty = () => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const context = useContext(Party);
+  console.log(context.partyName.id);
+  if(context.partyName.id===undefined){
+    navigate("/");
+  }
   // console.log(context.partyName);
   useEffect(() => {
     fetch("https://handymoney.herokuapp.com/person/", { method: "GET" })
@@ -73,12 +77,13 @@ const AddParty = () => {
 
   return (
     <div>
+      <Row className="m-5">
+        <Col>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Row>
+          <Row className="m-5">
             <Form.Label>Add Party Members</Form.Label>
-            <Col md={{ span: 4, offset: 4 }}>
-              {" "}
+            <Col sm>
               <Form.Control
                 name="name"
                 id="name"
@@ -89,13 +94,14 @@ const AddParty = () => {
             </Col>
           </Row>
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
+        <Button size="sm" variant="secondary" type="submit">
+          Add to party
         </Button>
       </Form>
+      </Col>
       <br></br>
       <br></br>
-
+      <Col>
       <div className="centercard">
       <Card bg="light" variant="light" margin="light" style={{ margin:"auto", width: "40rem" }}>
         <Card.Body>
@@ -149,6 +155,8 @@ const AddParty = () => {
         </Card.Body>
       </Card>
       </div>
+      </Col>
+      </Row>
       {/* <form onSubmit={handleSubmit}>
         <input
           name="name"
@@ -161,7 +169,7 @@ const AddParty = () => {
       </form> */}
     
 <br></br>
-      <Button variant="primary" onClick={() => navigate("/tally")}>
+      <Button variant="primary" size="lg" onClick={() => navigate("/tally")}>
         Confirm Party
       </Button>
       {/* <ul>

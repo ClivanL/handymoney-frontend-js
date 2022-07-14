@@ -16,6 +16,7 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
   const [list, setList] = useState([]);
   const [mod, setMod] = useState(0);
   const [toggle, setToggle] = useState(false);
+  const [num,setNum]=useState(-1);
   const [item, setItem] = useState({
     itemName: "",
     price: 0,
@@ -64,8 +65,9 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
       });
   };
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
     setToggle(true);
+    setNum(id)
   };
 
   return (
@@ -155,7 +157,7 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
             </tr>
           </thead>
           <tbody>
-            {list.map((item) => {
+            {/* {list.map((item) => {
               return toggle === true ? (
                 <EditForm
                   mod={mod}
@@ -174,6 +176,32 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
                   </td>
                   <td>
                     <Button onClick={handleEdit} size="sm" variant="warning">
+                      Edit
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })} */}
+                        {list.map((item) => {
+              return num === item.id ? (
+                <EditForm
+                  mod={mod}
+                  item={item.itemName}
+                  price={item.price}
+                  setMod={setMod}
+                  setToggle={setToggle}
+                  receiptid={receiptid}
+                  id={item.id}
+                  setNum={setNum}
+                />
+              ) : (
+                <tr>
+                  <td>{item.itemName}</td>
+                  <td>
+                    <DollarRep value={item.price} />
+                  </td>
+                  <td>
+                    <Button onClick={()=>handleEdit(item.id)} size="sm" variant="warning">
                       Edit
                     </Button>
                   </td>

@@ -4,6 +4,7 @@ import { Formik, Field, Form} from "formik";
 import {useNavigate} from 'react-router-dom'
 import {Party} from '../App'
 import DollarRep from "../components/DollarRep";
+import Button from "react-bootstrap/Button";
 
 
 const ExcludeFromSplit = () => {
@@ -75,7 +76,7 @@ const ExcludeFromSplit = () => {
 
                 </>
             })}
-            <button type="submit">Submit</button>
+            <Button type="submit">Submit</Button>
          
         </Form>
 

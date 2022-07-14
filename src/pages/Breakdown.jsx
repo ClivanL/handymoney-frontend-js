@@ -1,5 +1,6 @@
 import { Party } from "../App";
 import { useEffect, useState, useContext } from "react";
+import {useNavigate} from 'react-router-dom'
 import useDetails from "../hooks/useDetails";
 import useItemDetails from "../hooks/useItemDetails";
 import CalculateBreakdown from "../functions/CalculateBreakdown";
@@ -7,9 +8,15 @@ import useReceipt from "../hooks/useReceipt";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
+import DollarRep from "../components/DollarRep";
 
 const Breakdown = () => {
   const context = useContext(Party);
+  const navigate=useNavigate();
+  console.log(context);
+  if(context.exclusion===undefined){
+    navigate("/");
+  }
   const { partyName, listPerson, listReceipt } = useDetails();
   const itemDetails = useItemDetails();
   console.log("item details", itemDetails);
@@ -68,9 +75,9 @@ const Breakdown = () => {
                 return (
                   <tr>
                     <td>{item.personName}</td>
-                    <td>{item.pay}</td>
-                    <td>{personCost[item.personName]===undefined?0:personCost[item.personName]}</td>
-                    <td>{personCost[item.personName]===undefined?0-item.pay:personCost[item.personName]-item.pay}</td>
+                    <td><DollarRep value={item.pay}/></td>
+                    <td>{personCost[item.personName]===undefined?<DollarRep value={0}/>:<DollarRep value={personCost[item.personName]}/>}</td>
+                    <td>{personCost[item.personName]===undefined?<DollarRep value={0-item.pay}/>:<DollarRep value={personCost[item.personName]-item.pay}/>}</td>
                   </tr>
                 );
               })}

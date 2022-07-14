@@ -7,6 +7,7 @@ const Home=()=>{
     return(
         <>
             <h1>TALLY EXPENSES HERE</h1>
+            <p>Click on image to begin</p>
             <Image onClick={()=>{navigate("/createparty"
             )
             }} src={showmethemoney}></Image>

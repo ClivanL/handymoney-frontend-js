@@ -3,7 +3,7 @@ const CalculateBreakdown= (exclusion, itemDetails, listPerson, listReceipt)=>{
 // console.log("exclusion",await exclusion);
 // console.log("itemdetails",await itemDetails);
 // console.log("itemdetails",await listPerson);
-console.log(Object.keys(exclusion))
+// console.log(Object.keys(exclusion))
 
 
 const foodToTabulate= itemDetails?.filter((item)=>{return Object.keys(exclusion).indexOf(item.id.toString())!==-1})

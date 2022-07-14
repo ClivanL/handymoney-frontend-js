@@ -14,8 +14,10 @@ const Tally = () => {
   const [listReceipt, setListReceipt] = useState([]);
   const [mod, setMod] = useState([]);
   const navigate = useNavigate();
-
-
+console.log(context.partyName.id);
+  if(context.partyName.id===undefined){
+    navigate("/");
+  }
   useEffect(() => {
     fetch(`https://handymoney.herokuapp.com/party/${context.partyName.id}`, {
       method: "GET",
@@ -69,13 +71,63 @@ const Tally = () => {
         setMod(data);
       });
   };
-  
 
-  return(
+  return (
     <>
       <h1>Start Tallying</h1>
+      <Row>
+        <Col className="m-5">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Row>
+            <Form.Label>Enter Receipts</Form.Label>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form.Control
+                id="details"
+                name="details"
+                placeholder="enter receipt description"
+                value={receipt.details}
+                onChange={(event) => {
+                  setReceipt({
+                    details: event.target.value,
+                    //   totalamount: receipt.totalamount,
+                    payer: receipt.payer,
+                    party: receipt.party,
+                  });
+                }}
+              />
+              <Form.Select
+                name="payer"
+                id="payer"
+                value={receipt.payer}
+                onChange={(event) => {
+                  setReceipt({
+                    payer: event.target.value,
+                    //   totalamount: receipt.totalamount,
+                    details: receipt.details,
+                    party: receipt.party,
+                  });
+                }}
+                aria-label="Default select example"
+              >
+                <option>Choose payer</option>
+                {listPerson.map((item) => {
+                  return (
+                    <option value={item.personName}>{item.personName}</option>
+                  );
+                })}
+              </Form.Select>
+            </Col>
+          </Row>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      </Col>
+      <Col className="m-5">
       <div>
-        Party you have selected:
+        Party Name:
         <h3>{partyName}</h3>
       </div>
       <div>
@@ -107,49 +159,7 @@ const Tally = () => {
           return <p>{item.personName}</p>;
         })}
       </div> */}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Row>
-            <Form.Label>Enter Receipts</Form.Label>
-            <Col md={{ span: 4, offset: 4 }}>
-              {" "}
-              <Form.Control
-                id="details"
-                name="details"
-                placeholder="enter receipt description"
-                value={receipt.details}
-                onChange={(event) => {
-                  setReceipt({
-                    details: event.target.value,
-                    //   totalamount: receipt.totalamount,
-                    payer: receipt.payer,
-                    party: receipt.party,
-                  });
-                }}
-              />
-                  <Form.Select name="payer"
-          id="payer"
-          value={receipt.payer}
-          onChange={(event) => {
-            setReceipt({
-              payer: event.target.value,
-              //   totalamount: receipt.totalamount,
-              details: receipt.details,
-              party: receipt.party,
-            });
-          }} aria-label="Default select example">
-      <option>Choose payer</option>
-      {listPerson.map((item) => {
-            return <option value={item.personName}>{item.personName}</option>;
-          })}
-    </Form.Select>
-            </Col>
-          </Row>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+
       {/* <form onSubmit={handleSubmit}>
         <input
           id="details"
@@ -193,36 +203,39 @@ const Tally = () => {
         </div>
       ))} */}
 
-<br></br>
-<br></br>
+      <br></br>
+      <br></br>
 
-       <Col md={{ span: 8, offset: 2 }}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Receipt No.</th>
-                <th>Details</th>
-                <th>Payer</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listReceipt.map((item, index) => {
-                return (
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{item.details}</td>
-                    <td>{item.payer}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+     
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Receipt No.</th>
+              <th>Details</th>
+              <th>Payer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listReceipt.map((item, index) => {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item.details}</td>
+                  <td>{item.payer}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
         </Col>
+      </Row>
 
-<br></br>
-<br></br>
-<br></br>
-      <Button variant="success" size="lg" onClick={() => navigate("/receipts")}>Confirm receipts</Button>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Button variant="success" size="lg" onClick={() => navigate("/receipts")}>
+        Confirm receipts
+      </Button>
     </>
   );
 };
