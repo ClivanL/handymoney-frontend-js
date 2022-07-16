@@ -37,12 +37,13 @@ const ExcludeFromSplit = () => {
 
   console.log(listItem);
   // console.log(context.exclusion);
-
+  // console.log(listPerson.map((item)=>item.personName))
+  // const arr={}
   return <>
+  {/* {listItem?.map((item)=>item.map((inneritem)=>{arr[inneritem.id]=listPerson?.map((item)=>item.personName)}))}
+  {console.log(arr)} */}
     <Formik
-      initialValues={{
-        
-      }}
+      initialValues={{}}
       onSubmit={async (values) => {
         context.setExclusion(values);
         navigate("/breakdown")

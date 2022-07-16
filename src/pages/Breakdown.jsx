@@ -22,6 +22,7 @@ const Breakdown = () => {
   console.log("item details", itemDetails);
   console.log("breakdown", context.exclusion);
   console.log("list receipts", listReceipt);
+  console.log("listperson", listPerson);
   const { groupByCategory, distributionToPerson, personCost } = CalculateBreakdown(
     context.exclusion,
     itemDetails,
@@ -72,6 +73,10 @@ const Breakdown = () => {
             </thead>
             <tbody>
               {distributionToPerson.map((item) => {
+                console.log(item)
+                console.log(personCost[item.personName])
+                console.log(0-item.pay)
+                console.log(personCost[item.personName]-item.pay)
                 return (
                   <tr>
                     <td>{item.personName}</td>

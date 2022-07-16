@@ -1,9 +1,10 @@
-const CalculateBreakdown= (exclusion, itemDetails, listPerson, listReceipt)=>{
+import useItemDetails from "../hooks/useItemDetails"
 
+const CalculateBreakdown= (exclusion, itemDetails, listPerson, listReceipt)=>{
 // console.log("exclusion",await exclusion);
 // console.log("itemdetails",await itemDetails);
 // console.log("itemdetails",await listPerson);
-// console.log(Object.keys(exclusion))
+console.log(Object.keys(exclusion))
 
 
 const foodToTabulate= itemDetails?.filter((item)=>{return Object.keys(exclusion).indexOf(item.id.toString())!==-1})
@@ -29,12 +30,13 @@ processed?.map((item)=>{
   })
 })
 console.log(obj);
-
+console.log(listPerson)
 const moneyDistribution=listPerson?.map((item) => {
       return obj?.[item?.personName]?.reduce((a, b) => {
         return a + b?.price/(b?.sharing?.length);
       }, 0);
     })
+console.log(moneyDistribution);
 const distributionToPerson=moneyDistribution?.map((item,index)=>{return {...listPerson?.[index],pay:item}})
 
 //https://dmitripavlutin.com/javascript-array-group/
