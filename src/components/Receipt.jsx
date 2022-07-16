@@ -96,6 +96,7 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
               />
               <Form.Control
                 type="number"
+                step="any"
                 name="price"
                 id="price"
                 placeholder="price"
