@@ -14,7 +14,7 @@ const Tally = () => {
   const [listReceipt, setListReceipt] = useState([]);
   const [mod, setMod] = useState([]);
   const navigate = useNavigate();
-console.log(context.partyName.id);
+// console.log(context.partyName.id);
   if(context.partyName.id===undefined){
     navigate("/");
   }

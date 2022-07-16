@@ -20,7 +20,7 @@ const AddPartyName=()=>{
       })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             context.setPartyName(data);
         })
         .then(navigate("/addtoparty"));

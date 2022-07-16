@@ -13,16 +13,16 @@ import DollarRep from "../components/DollarRep";
 const Breakdown = () => {
   const context = useContext(Party);
   const navigate=useNavigate();
-  console.log(context);
+  // console.log(context);
   if(context.exclusion===undefined){
     navigate("/");
   }
   const { partyName, listPerson, listReceipt } = useDetails();
   const itemDetails = useItemDetails();
-  console.log("item details", itemDetails);
-  console.log("breakdown", context.exclusion);
-  console.log("list receipts", listReceipt);
-  console.log("listperson", listPerson);
+  // console.log("item details", itemDetails);
+  // console.log("breakdown", context.exclusion);
+  // console.log("list receipts", listReceipt);
+  // console.log("listperson", listPerson);
   const { groupByCategory, distributionToPerson, personCost } = CalculateBreakdown(
     context.exclusion,
     itemDetails,
@@ -30,8 +30,8 @@ const Breakdown = () => {
     listReceipt
   );
 
-  console.log(groupByCategory);
-  console.log(distributionToPerson);
+  // console.log(groupByCategory);
+  // console.log(distributionToPerson);
 
   return (
     <>
@@ -73,10 +73,10 @@ const Breakdown = () => {
             </thead>
             <tbody>
               {distributionToPerson.map((item) => {
-                console.log(item)
-                console.log(personCost[item.personName])
-                console.log(0-item.pay)
-                console.log(personCost[item.personName]-item.pay)
+                // console.log(item)
+                // console.log(personCost[item.personName])
+                // console.log(0-item.pay)
+                // console.log(personCost[item.personName]-item.pay)
                 return (
                   <tr>
                     <td>{item.personName}</td>

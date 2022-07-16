@@ -86,10 +86,10 @@ const Testing = () => {
       },
     ]);
   }, []);
-  console.log(listItem);
-  console.log(listPerson);
-  console.log(listReceipt);
-  console.log(test);
+  // console.log(listItem);
+  // console.log(listPerson);
+  // console.log(listReceipt);
+  // console.log(test);
   // const arr={}
   // console.log(listItem.map((item)=>{arr[item.id]=listPerson?.map((item)=>item.personName)}))
 

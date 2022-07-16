@@ -4,18 +4,18 @@ const CalculateBreakdown= (exclusion, itemDetails, listPerson, listReceipt)=>{
 // console.log("exclusion",await exclusion);
 // console.log("itemdetails",await itemDetails);
 // console.log("itemdetails",await listPerson);
-console.log(Object.keys(exclusion))
+// console.log(Object.keys(exclusion))
 
 
 const foodToTabulate= itemDetails?.filter((item)=>{return Object.keys(exclusion).indexOf(item.id.toString())!==-1})
-console.log(foodToTabulate);
+// console.log(foodToTabulate);
 // console.log(exclusion);
 // console.log(foodToTabulate);
 // console.log(exclusion[foodToTabulate[0][0].id])
 const processed=foodToTabulate?.map((item)=>{
     return {...item, sharing: exclusion?.[item?.id]}
 })
-console.log(processed);
+// console.log(processed);
 
 const obj = {};
 // console.log(obj);
@@ -29,18 +29,18 @@ processed?.map((item)=>{
     return obj?.[inneritem]?.push(item);
   })
 })
-console.log(obj);
-console.log(listPerson)
+// console.log(obj);
+// console.log(listPerson)
 const moneyDistribution=listPerson?.map((item) => {
       return obj?.[item?.personName]?.reduce((a, b) => {
         return a + b?.price/(b?.sharing?.length);
       }, 0);
     })
-console.log(moneyDistribution);
+// console.log(moneyDistribution);
 const distributionToPerson=moneyDistribution?.map((item,index)=>{return {...listPerson?.[index],pay:item}})
 
 //https://dmitripavlutin.com/javascript-array-group/
-console.log(processed);
+// console.log(processed);
 
 const groupByCategory = processed?.reduce((group, product) => {
     const { receipt } = product;
@@ -48,8 +48,8 @@ const groupByCategory = processed?.reduce((group, product) => {
     group[receipt]?.push(product);
     return group;
   }, {});
-  console.log(groupByCategory);
-  console.log(distributionToPerson);
+  // console.log(groupByCategory);
+  // console.log(distributionToPerson);
 
 let personCost={}
 for(let i=0; i<listReceipt?.length;i++){
@@ -63,7 +63,7 @@ for(let i=0;i<foodToTabulate?.length;i++){
     }
   }
 }
-console.log(personCost);
+// console.log(personCost);
 
 return {groupByCategory:groupByCategory, distributionToPerson:distributionToPerson, personCost:personCost}
 

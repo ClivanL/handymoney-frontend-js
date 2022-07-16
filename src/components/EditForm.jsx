@@ -95,7 +95,7 @@ const EditForm = ({ setNum, mod, item, price, setMod, setToggle, receiptid, id }
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setNum(-1);
         setValue({ itemName: "", price: 0 });
         setMod(mod + 1);

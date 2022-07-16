@@ -9,7 +9,7 @@ const ChangePartyNameForm = ({ setMod,setToggle }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(context)
+    // console.log(context)
     fetch(
       `https://handymoney.herokuapp.com/party/${context.partyName.id}/`,
       {
@@ -20,7 +20,7 @@ const ChangePartyNameForm = ({ setMod,setToggle }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         context.setPartyName(data);
       });
     setToggle(false);

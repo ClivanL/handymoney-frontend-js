@@ -16,7 +16,7 @@ const AddParty = () => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const context = useContext(Party);
-  console.log(context.partyName.id);
+  // console.log(context.partyName.id);
   if(context.partyName.id===undefined){
     navigate("/");
   }
@@ -49,7 +49,7 @@ const AddParty = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setPerson("");
         setMod(mod+1);
       });
@@ -73,7 +73,7 @@ const AddParty = () => {
 
     // });
   };
-  console.log(context.partyName.partyName);
+  // console.log(context.partyName.partyName);
 
   return (
     <div>
