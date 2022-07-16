@@ -11,6 +11,7 @@ import ExcludeFromSplit from './pages/ExcludeFromSplit'
 import Testing from './pages/Testing'
 import Breakdown from './pages/Breakdown'
 import Home from './pages/Home'
+import Testing2 from './pages/Testing2'
 
 
 
@@ -34,7 +35,8 @@ const [payed, setPayed]=useState({})
       <Route path="/receipts" element={<Receipts/>}/>
       <Route path="/toexcludefromsplit" element={<ExcludeFromSplit/>}/>
       <Route path="/breakdown" element={<Breakdown/>}/>
-      <Route path="/testing" element={<Testing/>}/>
+      {/* <Route path="/testing" element={<Testing/>}/> */}
+      {/* <Route path="/testing2" element={<Testing2/>}/> */}
     </Routes>
     </BrowserRouter>
     </Party.Provider>

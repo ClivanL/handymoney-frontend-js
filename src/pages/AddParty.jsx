@@ -17,9 +17,9 @@ const AddParty = () => {
   const navigate = useNavigate();
   const context = useContext(Party);
   // console.log(context.partyName.id);
-  if(context.partyName.id===undefined){
-    navigate("/");
-  }
+  // if(context.partyName.id===undefined){
+  //   navigate("/");
+  // }
   // console.log(context.partyName);
   useEffect(() => {
     fetch("https://handymoney.herokuapp.com/person/", { method: "GET" })

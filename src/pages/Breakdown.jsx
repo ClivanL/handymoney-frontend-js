@@ -1,8 +1,9 @@
 import { Party } from "../App";
 import { useEffect, useState, useContext } from "react";
 import {useNavigate} from 'react-router-dom'
-import useDetails from "../hooks/useDetails";
-import useItemDetails from "../hooks/useItemDetails";
+// import useDetails from "../hooks/useDetails";
+import useAllDetails from "../hooks/useAllDetails";
+// import useItemDetails from "../hooks/useItemDetails";
 import CalculateBreakdown from "../functions/CalculateBreakdown";
 import useReceipt from "../hooks/useReceipt";
 import Row from "react-bootstrap/Row";
@@ -12,24 +13,31 @@ import DollarRep from "../components/DollarRep";
 
 const Breakdown = () => {
   const context = useContext(Party);
-  const navigate=useNavigate();
+
+  // const navigate=useNavigate();
   // console.log(context);
-  if(context.exclusion===undefined){
-    navigate("/");
-  }
-  const itemDetails = useItemDetails();
-  const { partyName, listPerson, listReceipt } = useDetails();
+  // if(context.exclusion===undefined){
+  //   navigate("/");
+  // }
+
+  
+  // const itemDetails = useItemDetails();
+  // const { partyName, listPerson, listReceipt } = useDetails();
+
+  const {itemDetails, partyName, listPerson, listReceipt } = useAllDetails();
   
   // console.log("item details", itemDetails);
   // console.log("breakdown", context.exclusion);
   // console.log("list receipts", listReceipt);
   // console.log("listperson", listPerson);
+ 
   const { groupByCategory, distributionToPerson, personCost } = CalculateBreakdown(
     context.exclusion,
     itemDetails,
     listPerson,
     listReceipt
   );
+  
 
   // console.log(groupByCategory);
   // console.log(distributionToPerson);
