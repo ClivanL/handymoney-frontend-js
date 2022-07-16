@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image'
+import showmethemoney from '../../images/showmethemoney.jpeg'
 
 
 const AddPartyName=()=>{
@@ -39,6 +41,9 @@ const AddPartyName=()=>{
         Submit
       </Button>
     </Form>
+    <br></br>
+    <br></br>
+    <Image src={showmethemoney}></Image>
     {/* <form onSubmit={handleSubmit}>
         <input name="partyname" id="partyname" placeholder="input party name" value={context.partyName.partyName} onChange={(event)=>context.setPartyName({partyName:event.target.value, partyId:context.partyName.id})}/>
         <button>Create Party</button>

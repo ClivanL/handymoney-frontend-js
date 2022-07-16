@@ -1,5 +1,6 @@
 import Image from 'react-bootstrap/Image'
 import showmethemoney from '../../images/showmethemoney.jpeg'
+import HanDyMoney2 from '../../images/HanDyMoney2.jpg'
 import {useNavigate} from 'react-router-dom'
 
 const Home=()=>{
@@ -10,7 +11,8 @@ const Home=()=>{
             <p>Click on image to begin</p>
             <Image onClick={()=>{navigate("/createparty"
             )
-            }} src={showmethemoney}></Image>
+            }} src={HanDyMoney2}></Image>
+            
         </>
     )
 }

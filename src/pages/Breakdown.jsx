@@ -17,8 +17,9 @@ const Breakdown = () => {
   if(context.exclusion===undefined){
     navigate("/");
   }
-  const { partyName, listPerson, listReceipt } = useDetails();
   const itemDetails = useItemDetails();
+  const { partyName, listPerson, listReceipt } = useDetails();
+  
   // console.log("item details", itemDetails);
   // console.log("breakdown", context.exclusion);
   // console.log("list receipts", listReceipt);
