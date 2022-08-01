@@ -12,9 +12,6 @@ const ExcludeFromSplit = () => {
   const navigate=useNavigate();
   const { partyName, listPerson, listReceipt } = useDetails();
   const [listItem, setListItem] = useState([]);
-  // console.log(partyName);
-  // console.log(listPerson);
-  // console.log(listReceipt);
 
   useEffect(() => {
     fetch("https://handymoney.herokuapp.com/item/", {
@@ -23,10 +20,8 @@ const ExcludeFromSplit = () => {
       .then((response) => response.json())
       .then((data) => {
         const receipts = listReceipt?.map((item) => {
-          // console.log(item);
           return `https://handymoney.herokuapp.com/receipt/${item.id}/`;
         });
-        // console.log(receipts);
         setListItem(
           receipts.map((item) => {
             return data.filter((iteminner) => iteminner.receipt === item);
@@ -35,10 +30,6 @@ const ExcludeFromSplit = () => {
       });
   }, [listReceipt]);
 
-  // console.log(listItem);
-  // console.log(context.exclusion);
-  // console.log(listPerson.map((item)=>item.personName))
-  // const arr={}
   return <>
   {/* {listItem?.map((item)=>item.map((inneritem)=>{arr[inneritem.id]=listPerson?.map((item)=>item.personName)}))}
   {console.log(arr)} */}

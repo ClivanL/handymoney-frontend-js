@@ -26,7 +26,6 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
     fetch("https://handymoney.herokuapp.com/item/", { method: "GET" })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setList(
           data.filter((item) => {
             return (
@@ -47,12 +46,9 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
     // );
   }, [mod]);
 
-  // console.log(context.payed);
-  // console.log(list);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(item);
     fetch("https://handymoney.herokuapp.com/item/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -60,7 +56,6 @@ const Receipt = ({ listPerson, receiptdetails, index, payer, receiptid }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setMod(mod + 1);
       });
   };
